@@ -977,6 +977,11 @@
   .hero-ctas .btn { padding: 13px 22px !important; font-size: 13px !important; }
 }
 </style>
+
+<style id="footer-logo-fix">
+footer .logo-mark { background: var(--white); border-radius: 50%; padding: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); width: 72px !important; height: 72px !important; }
+footer .logo-mark img { object-fit: contain; }
+</style>
 </head>
 <body>
 
@@ -1008,6 +1013,7 @@
         </div>
       </div>
       <a href="renovations.html">Renovations</a>
+      <a href="index.html#about">About</a>
       <div class="has-menu current">
         <a href="index.html#area">Service Area<span class="caret"></span></a>
         <div class="submenu">
@@ -1021,13 +1027,12 @@
 <a href="michigan-city.html">Michigan City</a>
         </div>
       </div>
-      <a href="index.html#about">About</a>
       <div class="mobile-cta">
-        <a href="index.html#quote" class="btn btn-primary btn-pill">Get a Free Estimate</a>
+        <a href="index.html#quote-form" class="btn btn-primary btn-pill">Get a Free Estimate</a>
       </div>
     </nav>
     <div class="header-cta">
-      <a href="index.html#quote" class="btn btn-primary btn-pill">Get a Free Estimate</a>
+      <a href="index.html#quote-form" class="btn btn-primary btn-pill">Get a Free Estimate</a>
     </div>
     <button class="mobile-toggle" id="mobile-toggle" onclick="document.getElementById('nav').classList.toggle('open'); this.classList.toggle('open');" aria-label="Open navigation menu">
       <svg class="icon-burger" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
@@ -1051,7 +1056,7 @@
       <h1>Your shoreline,<br/>built to <em>last a lifetime.</em></h1>
       <p class="hero-tagline">Captain's Choice serves the Sister Lakes chain — Round Lake, Big Crooked, Little Crooked, and Cable Lake — with seasonal dock installation and removal, boat lifts, seawalls, decking, and custom inland-lake construction. Family-owned Cass County contractor since 2015.</p>
       <div class="hero-ctas">
-        <a href="#quote" class="btn btn-primary">Get a Free Estimate</a>
+        <a href="#quote-form" class="btn btn-primary">Get a Free Estimate</a>
         <a href="#services" class="btn btn-outline">View Our Services</a>
       </div>
     </div>
@@ -1329,7 +1334,7 @@
         <a href="mailto:info@captainschoicellc.com" style="font-size: 18px;">info@captainschoicellc.com</a>
       </div>
     </div>
-    <div class="form">
+    <div class="form" id="quote-form">
       <h3>Request a Free Quote</h3>
       <form onsubmit="event.preventDefault(); alert('Form submitted! (This is a demo.)');">
         <div class="form-row split">
@@ -1386,7 +1391,7 @@
     <div class="footer-grid">
       <div class="footer-about">
         <div class="logo">
-          <div class="logo-mark"><img src="assets/logo/captains-choice-white.png" alt="Captain's Choice LLC" /></div>
+          <div class="logo-mark"><img src="assets/logo/captains-choice-navy.png" alt="Captain's Choice LLC" /></div>
           <div class="logo-text">
             <strong>Captain's Choice</strong>
             <small>Marine Construction</small>
