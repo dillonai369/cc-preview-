@@ -854,6 +854,129 @@
 }
 
 </style>
+
+<style id="mobile-fix-final">
+@media (max-width: 960px) {
+  /* === BURGER MENU — blurred glass overlay === */
+  .site-header .main-nav { display: none !important; }
+  .site-header .main-nav.open {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    position: fixed !important;
+    top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
+    width: 100% !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    background: rgba(20, 37, 58, 0.72) !important;
+    backdrop-filter: saturate(160%) blur(24px) !important;
+    -webkit-backdrop-filter: saturate(160%) blur(24px) !important;
+    padding: 96px 28px 48px !important;
+    margin: 0 !important;
+    overflow-y: auto !important;
+    gap: 0 !important;
+    z-index: 95 !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+  .site-header .main-nav.open > a,
+  .site-header .main-nav.open .has-menu > a {
+    width: 100% !important;
+    display: block !important;
+    padding: 16px 4px !important;
+    font-size: 22px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    border-bottom: 1px solid rgba(255,255,255,0.14) !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    letter-spacing: 0.01em !important;
+    text-align: left !important;
+    position: static !important;
+  }
+  .site-header .main-nav.open .has-menu { display: block !important; width: 100% !important; position: static !important; }
+  .site-header .main-nav.open .has-menu > a > .caret { display: none !important; }
+  .site-header .main-nav.open .has-menu > a::after { display: none !important; content: none !important; }
+  .site-header .main-nav.open > a::after { display: none !important; content: none !important; }
+  
+  .site-header .main-nav.open .submenu {
+    display: block !important;
+    position: static !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 4px 0 8px 16px !important;
+    margin: 0 !important;
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+  .site-header .main-nav.open .submenu a {
+    display: block !important;
+    width: 100% !important;
+    padding: 12px 4px !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    color: rgba(255,255,255,0.78) !important;
+    border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    letter-spacing: 0.02em !important;
+  }
+  .site-header .main-nav.open .submenu a:last-child { border-bottom: none !important; }
+  .site-header .main-nav.open .submenu a.current { color: #d4c39a !important; }
+  
+  /* CTA pinned at bottom of menu */
+  .site-header .main-nav.open .mobile-cta {
+    display: block !important;
+    margin-top: 36px !important;
+    text-align: center !important;
+  }
+  .site-header .main-nav.open .mobile-cta .btn {
+    display: inline-flex !important;
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 18px 28px !important;
+    font-size: 14px !important;
+    background: #b8a37c !important;
+    color: #14253a !important;
+    border: 2px solid #b8a37c !important;
+    border-radius: 999px !important;
+  }
+  
+  /* Burger toggle stays above the overlay */
+  .site-header .mobile-toggle {
+    display: inline-flex !important;
+    z-index: 100 !important;
+    position: relative !important;
+    background: #1e3548 !important;
+    color: #fff !important;
+  }
+  .site-header .mobile-toggle.open { background: rgba(255,255,255,0.95) !important; color: #1e3548 !important; }
+  .site-header .mobile-toggle.open svg { stroke: #1e3548 !important; }
+  
+  /* Lock body scroll when menu is open */
+  body:has(.main-nav.open) { overflow: hidden !important; }
+  
+  /* === HERO TWEAKS (homepage primarily) === */
+  .hero { min-height: 70vh !important; min-height: 70dvh !important; }
+  .hero .hero-content { padding: 56px 0 80px !important; }
+  /* Hide top eyebrow on hero on mobile (the "Born on Lake Michigan" line) */
+  .hero .hero-content > .eyebrow { display: none !important; }
+  .hero h1 { margin-top: 0 !important; font-size: clamp(2.2rem, 9vw, 3.4rem) !important; }
+  .hero p, .hero .hero-tagline { font-size: 15px !important; line-height: 1.55 !important; }
+  /* Hero meta strip — hide on small screens */
+  .hero-meta { display: none !important; }
+  .scroll-cue { display: none !important; }
+  
+  /* Bring CTAs in tighter */
+  .hero-ctas { gap: 10px !important; flex-wrap: wrap !important; }
+  .hero-ctas .btn { padding: 13px 22px !important; font-size: 13px !important; }
+}
+</style>
 </head>
 <body>
 
@@ -1307,5 +1430,134 @@
   });
 </script>
 
+
+<script id="mobile-menu-final">
+(function() {
+  function init() {
+    var toggle = document.querySelector('.mobile-toggle');
+    var nav = document.getElementById('nav');
+    if (!toggle || !nav) return;
+    
+    // Strip the inline onclick attribute and replace with our handler
+    toggle.removeAttribute('onclick');
+    
+    // Build inline style strings
+    var navOpenStyle = 'display:flex !important;flex-direction:column !important;position:fixed !important;top:0 !important;left:0 !important;right:0 !important;bottom:0 !important;width:100vw !important;height:100vh !important;height:100dvh !important;background:rgba(20,37,58,0.78) !important;backdrop-filter:blur(24px) saturate(160%) !important;-webkit-backdrop-filter:blur(24px) saturate(160%) !important;padding:96px 28px 48px !important;margin:0 !important;overflow-y:auto !important;z-index:9999 !important;box-shadow:none !important;border:none !important;align-items:stretch !important;justify-content:flex-start !important;gap:0 !important;';
+    
+    var topLinkStyle = 'display:block !important;padding:18px 4px !important;font-size:22px !important;font-weight:700 !important;color:#fff !important;border-bottom:1px solid rgba(255,255,255,0.15) !important;text-decoration:none !important;background:transparent !important;text-align:left !important;letter-spacing:0.01em !important;width:100% !important;';
+    
+    var hasMenuStyle = 'display:block !important;width:100% !important;position:static !important;';
+    
+    var submenuStyle = 'display:block !important;position:static !important;opacity:1 !important;visibility:visible !important;transform:none !important;background:transparent !important;border:none !important;box-shadow:none !important;padding:4px 0 8px 16px !important;margin:0 !important;min-width:0 !important;width:100% !important;';
+    
+    var subLinkStyle = 'display:block !important;padding:12px 4px !important;font-size:16px !important;font-weight:500 !important;color:rgba(255,255,255,0.78) !important;border-bottom:1px solid rgba(255,255,255,0.08) !important;text-decoration:none !important;background:transparent !important;border-radius:0 !important;letter-spacing:0.02em !important;width:100% !important;';
+    
+    var ctaWrapStyle = 'display:block !important;margin-top:36px !important;text-align:center !important;';
+    var ctaBtnStyle = 'display:inline-flex !important;width:100% !important;justify-content:center !important;padding:18px 28px !important;font-size:14px !important;font-weight:700 !important;background:#b8a37c !important;color:#14253a !important;border:2px solid #b8a37c !important;border-radius:999px !important;text-decoration:none !important;letter-spacing:0.04em !important;text-transform:uppercase !important;';
+    
+    function openMenu() {
+      document.body.style.overflow = 'hidden';
+      nav.style.cssText = navOpenStyle;
+      Array.prototype.forEach.call(nav.children, function(child) {
+        if (child.tagName === 'A') {
+          child.style.cssText = topLinkStyle;
+        } else if (child.classList && child.classList.contains('has-menu')) {
+          child.style.cssText = hasMenuStyle;
+          var parentA = child.querySelector(':scope > a, a');
+          if (parentA) {
+            parentA.style.cssText = topLinkStyle;
+            var caret = parentA.querySelector('.caret');
+            if (caret) caret.style.display = 'none';
+          }
+          var sub = child.querySelector('.submenu');
+          if (sub) {
+            sub.style.cssText = submenuStyle;
+            Array.prototype.forEach.call(sub.querySelectorAll('a'), function(subA) {
+              subA.style.cssText = subLinkStyle;
+            });
+          }
+        } else if (child.classList && child.classList.contains('mobile-cta')) {
+          child.style.cssText = ctaWrapStyle;
+          var btn = child.querySelector('a');
+          if (btn) btn.style.cssText = ctaBtnStyle;
+        }
+      });
+    }
+    
+    function closeMenu() {
+      document.body.style.overflow = '';
+      nav.removeAttribute('style');
+      Array.prototype.forEach.call(nav.querySelectorAll('*'), function(el) {
+        if (el.tagName !== 'svg' && el.tagName !== 'SVG' && el.tagName !== 'PATH' && el.tagName !== 'LINE') {
+          el.removeAttribute('style');
+        }
+      });
+    }
+    
+    toggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      var isOpen = nav.classList.toggle('open');
+      toggle.classList.toggle('open');
+      if (isOpen) openMenu(); else closeMenu();
+    });
+    
+    // Close menu on link click
+    nav.addEventListener('click', function(e) {
+      if (e.target.tagName === 'A') {
+        nav.classList.remove('open');
+        toggle.classList.remove('open');
+        closeMenu();
+      }
+    });
+    
+    // Close on viewport resize over breakpoint
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 960 && nav.classList.contains('open')) {
+        nav.classList.remove('open');
+        toggle.classList.remove('open');
+        closeMenu();
+      }
+    });
+    
+    // Hide hero eyebrow on mobile (homepage "Born on Lake Michigan" line)
+    function handleEyebrow() {
+      Array.prototype.forEach.call(document.querySelectorAll('section.hero .hero-content > .eyebrow'), function(el) {
+        if (window.innerWidth <= 768) el.style.display = 'none';
+        else el.style.display = '';
+      });
+    }
+    handleEyebrow();
+    window.addEventListener('resize', handleEyebrow);
+    
+    // Swap hero video source on mobile
+    var heroVid = document.querySelector('.hero-video');
+    if (heroVid) {
+      var src = heroVid.querySelector('source');
+      if (src) {
+        var desktopSrc = src.getAttribute('src');
+        var mobileSrc = 'hero-bg-mobile.mp4';
+        function swapVideo() {
+          var wantMobile = window.innerWidth <= 768;
+          var current = src.getAttribute('src');
+          var target = wantMobile ? mobileSrc : (desktopSrc.indexOf('mobile') === -1 ? desktopSrc : 'hero-bg.mp4');
+          if (current !== target) {
+            src.setAttribute('src', target);
+            heroVid.setAttribute('poster', wantMobile ? 'hero-poster-mobile.jpg' : 'hero-poster.jpg');
+            heroVid.load();
+            heroVid.play().catch(function(){});
+          }
+        }
+        swapVideo();
+      }
+    }
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
 </body>
 </html>
