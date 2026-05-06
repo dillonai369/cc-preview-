@@ -9,6 +9,10 @@
 <meta property="og:title" content="Seasonal Dock Installation, Removal & Storage | SW Michigan | Captain's Choice LLC — St. Joseph MI" />
 <meta property="og:description" content="Seasonal aluminum and vinyl floating dock systems for St. Joseph, Bridgman, New Buffalo, South Haven, Stevensville, and SW Michigan inland lakes. We install, remove, and store every year. Free estimates from a family-owned crew." />
 <meta property="og:type" content="website" />
+<meta property="og:url" content="https://captainschoicellc.com/seasonal-docks.html" />
+<meta property="og:image" content="https://captainschoicellc.com/assets/og-image.png" />
+<meta property="og:image:width" content="1717" />
+<meta property="og:image:height" content="916" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,0,700;9..144,1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -638,6 +642,12 @@ footer .logo-mark { width:64px; height:64px; }
     function openMenu() {
       document.body.style.overflow = 'hidden';
       nav.style.cssText = navOpenStyle;
+      // Force toggle above overlay with white X clearly visible
+      toggle.style.cssText = 'display:inline-flex !important;position:fixed !important;top:12px !important;right:20px !important;z-index:10000 !important;background:#ffffff !important;color:#1e3548 !important;border:none !important;width:48px !important;height:48px !important;border-radius:999px !important;cursor:pointer !important;align-items:center !important;justify-content:center !important;padding:0 !important;box-shadow:0 2px 12px rgba(0,0,0,0.18) !important;';
+      var burgerIcon = toggle.querySelector('.icon-burger');
+      var closeIcon = toggle.querySelector('.icon-close');
+      if (burgerIcon) burgerIcon.style.cssText = 'display:none !important;';
+      if (closeIcon) { closeIcon.style.cssText = 'display:block !important;'; closeIcon.setAttribute('stroke', '#1e3548'); }
       Array.prototype.forEach.call(nav.children, function(child) {
         if (child.tagName === 'A') {
           child.style.cssText = topLinkStyle;
@@ -667,20 +677,26 @@ footer .logo-mark { width:64px; height:64px; }
     function closeMenu() {
       document.body.style.overflow = '';
       nav.removeAttribute('style');
+      // Restore toggle to normal state
+      toggle.removeAttribute('style');
+      var burgerIcon = toggle.querySelector('.icon-burger');
+      var closeIcon = toggle.querySelector('.icon-close');
+      if (burgerIcon) burgerIcon.removeAttribute('style');
+      if (closeIcon) { closeIcon.removeAttribute('style'); closeIcon.removeAttribute('stroke'); }
       Array.prototype.forEach.call(nav.querySelectorAll('*'), function(el) {
         if (el.tagName !== 'svg' && el.tagName !== 'SVG' && el.tagName !== 'PATH' && el.tagName !== 'LINE') {
           el.removeAttribute('style');
         }
       });
     }
-    
+
     toggle.addEventListener('click', function(e) {
       e.preventDefault();
       var isOpen = nav.classList.toggle('open');
       toggle.classList.toggle('open');
       if (isOpen) openMenu(); else closeMenu();
     });
-    
+
     // Close menu on link click
     nav.addEventListener('click', function(e) {
       if (e.target.tagName === 'A') {
