@@ -982,6 +982,22 @@
 footer .logo-mark { background: var(--white); border-radius: 50%; padding: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); width: 72px !important; height: 72px !important; }
 footer .logo-mark img { object-fit: contain; }
 </style>
+
+<style id="hero-banner-image">
+.hero .hero-banner-img {
+  position: absolute; inset: 0;
+  background-image: url('assets/hero-banner.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+.hero .hero-video { display: none; }
+@media (max-width: 768px) {
+  .hero .hero-banner-img { display: none; }
+  .hero .hero-video { display: block; }
+}
+</style>
 </head>
 <body>
 
@@ -1043,6 +1059,7 @@ footer .logo-mark img { object-fit: contain; }
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-banner-img" aria-hidden="true"></div>
   <video class="hero-video"
          autoplay muted loop playsinline preload="auto"
          poster="hero-poster.jpg"
@@ -1140,7 +1157,7 @@ footer .logo-mark img { object-fit: contain; }
       </a>
 
       <a href="renovations.html" class="service-card">
-        <div class="img" style="background-image: url('assets/library/hero-main.jpg');"></div>
+        <div class="img" style="background-image: url('assets/creatives/IMG_4663.jpg');"></div>
         <div class="content">
           <h3>Renovations & Construction</h3>
           <p>Beyond the water — we also build, restore, and renovate homes and commercial spaces.</p>
