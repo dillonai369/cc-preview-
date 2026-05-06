@@ -1442,7 +1442,7 @@
     toggle.removeAttribute('onclick');
     
     // Build inline style strings
-    var navOpenStyle = 'display:flex !important;flex-direction:column !important;position:fixed !important;top:0 !important;left:0 !important;right:0 !important;bottom:0 !important;width:100vw !important;height:100vh !important;height:100dvh !important;background:rgba(20,37,58,0.78) !important;backdrop-filter:blur(24px) saturate(160%) !important;-webkit-backdrop-filter:blur(24px) saturate(160%) !important;padding:96px 28px 48px !important;margin:0 !important;overflow-y:auto !important;z-index:9999 !important;box-shadow:none !important;border:none !important;align-items:stretch !important;justify-content:flex-start !important;gap:0 !important;';
+    var navOpenStyle = 'display:flex !important;flex-direction:column !important;position:fixed !important;top:0 !important;left:0 !important;right:0 !important;bottom:0 !important;width:100vw !important;height:100vh !important;height:100dvh !important;background:rgba(10,22,42,0.93) !important;backdrop-filter:blur(24px) saturate(200%) !important;-webkit-backdrop-filter:blur(24px) saturate(200%) !important;padding:96px 28px 48px !important;margin:0 !important;overflow-y:auto !important;z-index:9999 !important;box-shadow:none !important;border:none !important;align-items:stretch !important;justify-content:flex-start !important;gap:0 !important;';
     
     var topLinkStyle = 'display:block !important;padding:18px 4px !important;font-size:22px !important;font-weight:700 !important;color:#fff !important;border-bottom:1px solid rgba(255,255,255,0.15) !important;text-decoration:none !important;background:transparent !important;text-align:left !important;letter-spacing:0.01em !important;width:100% !important;';
     
@@ -1455,8 +1455,19 @@
     var ctaWrapStyle = 'display:block !important;margin-top:36px !important;text-align:center !important;';
     var ctaBtnStyle = 'display:inline-flex !important;width:100% !important;justify-content:center !important;padding:18px 28px !important;font-size:14px !important;font-weight:700 !important;background:#b8a37c !important;color:#14253a !important;border:2px solid #b8a37c !important;border-radius:999px !important;text-decoration:none !important;letter-spacing:0.04em !important;text-transform:uppercase !important;';
     
+    // Backdrop overlay for click-outside-to-close
+    var backdrop = document.createElement('div');
+    backdrop.style.cssText = 'display:none;position:fixed;inset:0;z-index:9998;';
+    document.body.appendChild(backdrop);
+    backdrop.addEventListener('click', function() {
+      nav.classList.remove('open');
+      toggle.classList.remove('open');
+      closeMenu();
+    });
+
     function openMenu() {
       document.body.style.overflow = 'hidden';
+      backdrop.style.display = 'block';
       nav.style.cssText = navOpenStyle;
       Array.prototype.forEach.call(nav.children, function(child) {
         if (child.tagName === 'A') {
@@ -1486,6 +1497,7 @@
     
     function closeMenu() {
       document.body.style.overflow = '';
+      backdrop.style.display = 'none';
       nav.removeAttribute('style');
       Array.prototype.forEach.call(nav.querySelectorAll('*'), function(el) {
         if (el.tagName !== 'svg' && el.tagName !== 'SVG' && el.tagName !== 'PATH' && el.tagName !== 'LINE') {
